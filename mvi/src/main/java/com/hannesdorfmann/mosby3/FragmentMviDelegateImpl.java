@@ -31,17 +31,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.hannesdorfmann.mosby3.mvi.MviPresenter;
 import com.hannesdorfmann.mosby3.mvp.MvpView;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.UUID;
 
 /**
  * The default implementation of {@link FragmentMviDelegate}
  * <p>
- * The View is attached to the Presenter in {@link Fragment#onViewCreated(View, Bundle)}.
+ * The View is attached to the Presenter in {@link Fragment#onStart()}.
  * So you better instantiate all your UI widgets before that lifecycle callback (typically in
  * {@link
  * Fragment#onCreateView(LayoutInflater, ViewGroup, Bundle)}. The View is detached from Presenter in
- * {@link Fragment#onDestroyView()}
+ * {@link Fragment#onStop()}
  * </p>
  *
  * @param <V> The type of {@link MvpView}
@@ -53,7 +52,6 @@ import java.util.UUID;
 public class FragmentMviDelegateImpl<V extends MvpView, P extends MviPresenter<V, ?>>
     implements FragmentMviDelegate<V, P> {
 
-  @SuppressFBWarnings(value = "MS_SHOULD_BE_FINAL", justification = "Could be enabled for debugging purpose")
   public static boolean DEBUG = false;
   private static final String DEBUG_TAG = "FragmentMviDelegateImpl";
   private static final String KEY_MOSBY_VIEW_ID = "com.hannesdorfmann.mosby3.fragment.mvi.id";
@@ -95,8 +93,12 @@ public class FragmentMviDelegateImpl<V extends MvpView, P extends MviPresenter<V
   }
 
   @Override public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
-    boolean viewStateWillBeRestored = false;
     onViewCreatedCalled = true;
+    }
+
+  @Override public void onStart() {
+
+    boolean viewStateWillBeRestored = false;
 
     if (mosbyViewId == null) {
       // No presenter available,
@@ -183,13 +185,18 @@ public class FragmentMviDelegateImpl<V extends MvpView, P extends MviPresenter<V
 
   @Override public void onDestroyView() {
     onViewCreatedCalled = false;
+  }
+
+  @Override public void onStop() {
 
     Activity activity = getActivity();
     boolean retainPresenterInstance =
         retainPresenterInstance(keepPresenterOnBackstack, activity, fragment);
 
     presenter.detachView(retainPresenterInstance);
-    if (!retainPresenterInstance && mosbyViewId != null) { // mosbyViewId == null if keepPresenterDuringScreenOrientationChange == false
+    if (!retainPresenterInstance
+        && mosbyViewId
+        != null) { // mosbyViewId == null if keepPresenterDuringScreenOrientationChange == false
       PresenterManager.remove(activity, mosbyViewId);
     }
 
@@ -239,9 +246,6 @@ public class FragmentMviDelegateImpl<V extends MvpView, P extends MviPresenter<V
     return activity;
   }
 
-  @Override public void onStart() {
-  }
-
   /**
    * Generates the unique (mosby internal) viewState id and calls {@link
    * MviDelegateCallback#createPresenter()}
@@ -273,9 +277,6 @@ public class FragmentMviDelegateImpl<V extends MvpView, P extends MviPresenter<V
         Log.d(DEBUG_TAG, "Saving MosbyViewId into Bundle. ViewId: " + mosbyViewId);
       }
     }
-  }
-
-  @Override public void onStop() {
   }
 
   @Override public void onAttach(Activity activity) {

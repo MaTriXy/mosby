@@ -1,7 +1,6 @@
 # Mosby
-A Model-View-Presenter library for modern Android apps.
+A Model-View-Presenter and Model-View-Intent library for Android apps.
 
-Check the [project website](http://hannesdorfmann.com/mosby/) for more information.
 
 [![Build Status](https://travis-ci.org/sockeqwe/mosby.svg?branch=master)](https://travis-ci.org/sockeqwe/mosby)
 
@@ -10,23 +9,24 @@ Check the [project website](http://hannesdorfmann.com/mosby/) for more informati
 ```groovy
 dependencies {
 
-  compile 'com.hannesdorfmann.mosby3:mvi:3.0.2' // Model-View-Intent
+  compile 'com.hannesdorfmann.mosby3:mvi:3.0.4' // Model-View-Intent
   // or
-  compile 'com.hannesdorfmann.mosby3:mvp:3.0.2' // Plain MVP
+  compile 'com.hannesdorfmann.mosby3:mvp:3.0.4' // Plain MVP
   // or
-  compile 'com.hannesdorfmann.mosby3:viewstate:3.0.2' // MVP + ViewState support
+  compile 'com.hannesdorfmann.mosby3:viewstate:3.0.4' // MVP + ViewState support
 }
 ```
+
 Additional modules:
 
 ```groovy
 dependencies {
 
   // MVP + ViewState + LCE Views
-  compile 'com.hannesdorfmann.mosby3:mvp-lce:3.0.2'
+  compile 'com.hannesdorfmann.mosby3:mvp-lce:3.0.4'
 
   // Null Object Presenter for MVP
-  compile 'com.hannesdorfmann.mosby3:mvp-nullobject-presenter:3.0.2'
+  compile 'com.hannesdorfmann.mosby3:mvp-nullobject-presenter:3.0.4'
 }
 ```
 
@@ -34,13 +34,13 @@ SNAPSHOT:
 ```groovy
 dependencies {
 
-  compile 'com.hannesdorfmann.mosby3:mvi:3.0.3-SNAPSHOT'
+  compile 'com.hannesdorfmann.mosby3:mvi:3.0.5-SNAPSHOT'
 
-  compile 'com.hannesdorfmann.mosby3:mvp:3.0.3-SNAPSHOT'
-  compile 'com.hannesdorfmann.mosby3:viewstate:3.0.3-SNAPSHOT'
+  compile 'com.hannesdorfmann.mosby3:mvp:3.0.5-SNAPSHOT'
+  compile 'com.hannesdorfmann.mosby3:viewstate:3.0.5-SNAPSHOT'
 
-  compile 'com.hannesdorfmann.mosby3:mvp-lce:3.0.3-SNAPSHOT'
-  compile 'com.hannesdorfmann.mosby3:mvp-nullobject-presenter:3.0.3-SNAPSHOT'
+  compile 'com.hannesdorfmann.mosby3:mvp-lce:3.0.5-SNAPSHOT'
+  compile 'com.hannesdorfmann.mosby3:mvp-nullobject-presenter:3.0.5-SNAPSHOT'
 }
 ```
 
@@ -57,7 +57,9 @@ allprojects {
 ```
 
 # Documentation
-See the [project website](http://hannesdorfmann.com/mosby/)
+See the [project website](http://hannesdorfmann.com/mosby/).
+
+For Model-View-Intent checkout [this blog post series](http://hannesdorfmann.com/android/mosby3-mvi-1).
 
 # Changelog
 The changelog can be found in the [release section](https://github.com/sockeqwe/mosby/releases)
