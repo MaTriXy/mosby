@@ -17,19 +17,19 @@
 package com.hannesdorfmann.mosby3.mvp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import com.hannesdorfmann.mosby3.mvp.delegate.FragmentMvpDelegateImpl;
+
 import com.hannesdorfmann.mosby3.mvp.delegate.FragmentMvpDelegate;
+import com.hannesdorfmann.mosby3.mvp.delegate.FragmentMvpDelegateImpl;
 import com.hannesdorfmann.mosby3.mvp.delegate.MvpDelegateCallback;
 
 /**
- * A Fragment that uses a {@link MvpPresenter} to implement a Model-View-Presenter
- * architecture
+ * A Fragment that uses a {@link MvpPresenter} to implement a Model-View-Presenter architecture.
  *
  * @author Hannes Dorfmann
  * @since 1.0.0
@@ -52,12 +52,11 @@ public abstract class MvpFragment<V extends MvpView, P extends MvpPresenter<V>> 
   public abstract P createPresenter();
 
   /**
-   * * Get the mvp delegate. This is internally used for creating presenter, attaching and
+   * Gets the mvp delegate. This is internally used for creating presenter, attaching and
    * detaching view from presenter.
    *
    * <p>
-   * <b>Please note that only one instance of mvp delegate should be used per fragment
-   * instance</b>.
+   * <b>Please note that only one instance of mvp delegate should be used per fragment instance</b>.
    * </p>
    *
    * <p>
@@ -131,9 +130,14 @@ public abstract class MvpFragment<V extends MvpView, P extends MvpPresenter<V>> 
     getMvpDelegate().onActivityCreated(savedInstanceState);
   }
 
-  @Override public void onAttach(Activity activity) {
+  @Deprecated @Override public void onAttach(Activity activity) {
     super.onAttach(activity);
     getMvpDelegate().onAttach(activity);
+  }
+
+  @Override public void onAttach(Context context) {
+    super.onAttach(context);
+    getMvpDelegate().onAttach(context);
   }
 
   @Override public void onDetach() {

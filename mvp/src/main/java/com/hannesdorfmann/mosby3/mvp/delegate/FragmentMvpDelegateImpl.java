@@ -17,6 +17,7 @@
 package com.hannesdorfmann.mosby3.mvp.delegate;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,8 +32,8 @@ import java.util.UUID;
 
 /**
  * The default implementation of {@link FragmentMvpDelegate}
- * Presenter is available (has view attached) in {@link #onViewCreated(View, Bundle)} (after
- * called super.onViewCreated()). View will be detached in {@link #onDestroyView()} from presenter,
+ * Presenter is available (has view that is attached) in {@link #onViewCreated(View, Bundle)} (after
+ * super.onViewCreated() is called). View will be detached in {@link #onDestroyView()} from presenter,
  * and eventually presenter will be destroyed in {@link #onDestroy()}.
  *
  * @param <V> The type of {@link MvpView}
@@ -207,6 +208,10 @@ public class FragmentMvpDelegateImpl<V extends MvpView, P extends MvpPresenter<V
   }
 
   @Override public void onAttach(Activity activity) {
+
+  }
+
+  @Override public void onAttach(Context context) {
 
   }
 

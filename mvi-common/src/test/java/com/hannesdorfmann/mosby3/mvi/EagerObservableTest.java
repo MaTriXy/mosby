@@ -29,7 +29,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Unit test that test if observables (like intents) are submitting directly in on subscribe,
+ * Tests if observables (like intents) are submitting directly in on subscribe,
  * that all events will be dispatched properly to view.render() and no one has been swallowed
  * because the observable stream hasn't been fully established yet.
  * @author Hannes Dorfmann
@@ -52,6 +52,7 @@ public class EagerObservableTest {
       renderedStates.add(state);
     }
   }
+
 
   private static class EagerPresenter extends MviBasePresenter<EagerView, String> {
     @Override protected void bindIntents() {
@@ -100,5 +101,7 @@ public class EagerObservableTest {
 
     Assert.assertEquals(Arrays.asList("Result 1", "Result 2"), view.renderedStates);
   }
+
+
 
 }
